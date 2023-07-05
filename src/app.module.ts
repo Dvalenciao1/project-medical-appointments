@@ -11,16 +11,11 @@ import { AppService } from './app.service';
     ConfigModule.forRoot(),
     TypeOrmModule.forFeature(),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      database: 'medical-office',
-      username: 'lh6ecnvuzv41a5pozo1q',
-      host: 'aws.connect.psdb.cloud',
-      password: 'pscale_pw_bOZZDah44wElDNeJKj9u3DBZWGX8dF4D6WbLEvSequk',
-
-      /* entities: [],
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: [],
       synchronize: true,
-      autoLoadEntities: true, */
-      insecureAuth: true,
+      autoLoadEntities: true,
     }),
   ],
   controllers: [AppController],
