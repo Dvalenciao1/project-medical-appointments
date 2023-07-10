@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 // *Modules
 import { MedicalInvoiceModule } from './module/medical-invoice/medical-invoice.module';
 import { ClientModule } from './module/client/client.module';
+import { MedicalHistoryModule } from './module/medical-history/medical-history.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ClientModule } from './module/client/client.module';
     }),
     MedicalInvoiceModule,
     ClientModule,
+    MedicalHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
