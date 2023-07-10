@@ -4,34 +4,36 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
-import { Patient } from './Patient.entity';
+import { Client } from './Client.entity';
 import { Colaborator } from './Colaborator.entity';
 import { medicalSchedule } from './MedicalSchedule.entity';
+import { medicalInvoice } from './MedicalInvoice.entity';
 
 @Entity()
 export class medicalAppointment {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @OneToOne(() => Patient)
-  @JoinColumn()
-  id_patient?: Patient;
+  @Column()
+  date_appointment!: Date;
+
+  @Column()
+  location_appointment!: string;
+
+  @Column()
+  state_appointment!: boolean;
 
   @OneToOne(() => Colaborator)
   @JoinColumn()
-  id_colaborator?: Colaborator;
+  colaborator!: Colaborator;
 
-  @OneToOne(() => medicalSchedule)
+  @OneToOne(() => Client)
   @JoinColumn()
-  id_agenda?: medicalSchedule;
+  client!: Client;
 
-  @Column()
-  appointment_date?: Date;
-
-  @Column()
-  appointment_location?: string;
-
-  @Column()
-  state?: boolean;
+  @OneToOne(() => medicalInvoice)
+  @JoinColumn({ name: 'invoice_id' })
+  invoice!: medicalInvoice;
 }
