@@ -20,10 +20,10 @@ export class Client {
   @Column({ type: 'int', width: 10, nullable: false })
   dni!: number;
 
-  @Column({ type: 'set', enum: ['Female', 'Male'], nullable: false })
+  @Column({ type: 'varchar', length: 6, nullable: false })
   gender!: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'date', nullable: false })
   birth_date!: Date;
 
   @Column({ type: 'int', width: 10, nullable: false })

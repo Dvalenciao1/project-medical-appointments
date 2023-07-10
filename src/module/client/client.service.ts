@@ -28,10 +28,7 @@ export class ClientService {
   }
 
   async createClient(client: ClientDto) {
-    return new Promise((resolve, rejects) => {
-      const response = this.clientRepository.save(client);
-      resolve(response);
-    });
+    return await this.clientRepository.save(client);
   }
 
   async findClientsById(id: number) {

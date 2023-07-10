@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 import { Client } from './Client.entity';
 import { Colaborator } from './Colaborator.entity';
-import { medicalSchedule } from './MedicalSchedule.entity';
 import { medicalInvoice } from './MedicalInvoice.entity';
 
 @Entity()
@@ -29,7 +28,7 @@ export class medicalAppointment {
   @JoinColumn()
   colaborator!: Colaborator;
 
-  @OneToOne(() => Client)
+  @OneToOne(() => Client, { cascade: true })
   @JoinColumn()
   client!: Client;
 

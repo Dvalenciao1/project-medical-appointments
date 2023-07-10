@@ -6,8 +6,8 @@ import {
   Param,
   Put,
   Delete,
-  UsePipes,
-  ValidationPipe,
+  ConflictException,
+  NotFoundException,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
@@ -21,24 +21,42 @@ export class ClientController {
   }
 
   @Get('/:id')
-  findClient(@Param('id') id: number) {
-    return this.clienteService.findClientsById(id);
+  async findClient(@Param('id') id: number) {
+    const client = await this.clienteService.findClientsById(id);
+    if (!client) {
+      throw new NotFoundException('El cliente no existe');
+    }
+    return { data: client };
   }
 
   @Post()
-  createClient(@Body() client: ClientDto) {
-    return this.clienteService.createClient(client).then((data) => {
-      console.log(data);
-    });
+  async createClient(@Body() client: ClientDto) {
+    try {
+      const data = await this.clienteService.createClient(client);
+      return { data, message: 'Se creo el nuevo cliente' };
+    } catch (error) {
+      if (error.errno == 1062)
+        throw new ConflictException(
+          `Ese correo ya esta registrado con un Paciente`,
+        );
+    }
   }
 
   @Put()
-  updateClient(@Body() client: ClientDto) {
-    return this.clienteService.updateClient(client);
+  async updateClient(@Body() client: ClientDto) {
+    try {
+      return await this.clienteService.updateClient(client);
+    } catch (error) {
+      return { error, message: error.message };
+    }
   }
 
   @Delete('/:id')
   deleteClient(@Param('id') id: number) {
-    return this.clienteService.deleteClient(id);
+    try {
+      return this.clienteService.deleteClient(id);
+    } catch (error) {
+      return { error, message: error.message };
+    }
   }
 }

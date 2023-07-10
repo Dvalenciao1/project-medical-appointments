@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-  ManyToOne,
 } from 'typeorm';
 import { Client } from './Client.entity';
 
@@ -28,7 +27,7 @@ export class medicalHistory {
   @Column()
   allergies!: string;
 
-  @OneToOne(() => Client, (client) => client.id)
+  @OneToOne(() => Client, (client) => client.id, { cascade: true })
   @JoinColumn({ name: 'client_id' })
   client!: Client;
 }
