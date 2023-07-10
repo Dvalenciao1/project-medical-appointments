@@ -1,49 +1,40 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  OneToMany,
-} from 'typeorm';
-
-import { medicalHistory } from './MedicalHistory.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Client {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   first_name!: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true })
   second_name?: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   surname!: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   second_surname!: string;
 
-  @Column()
+  @Column({ type: 'int', width: 10, nullable: false })
   dni!: number;
 
-  @Column()
+  @Column({ type: 'set', enum: ['Female', 'Male'], nullable: false })
   gender!: string;
 
-  @Column()
+  @Column({ type: 'date', nullable: true })
   birth_date!: Date;
 
-  @Column()
+  @Column({ type: 'int', width: 10, nullable: false })
   phone!: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: false })
   address!: string;
 
-  @Column({ unique: true })
+  @Column({ type: 'varchar', unique: true, nullable: false })
   email!: string;
 
-  @Column()
+  @Column({ type: 'boolean', nullable: false })
   health_insurance!: boolean;
 }

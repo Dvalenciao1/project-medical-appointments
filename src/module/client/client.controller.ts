@@ -6,9 +6,11 @@ import {
   Param,
   Put,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
-import { ClientDto } from 'src/common/models/dto/Client.dto';
+import { ClientDto } from 'src/module/client/dto/Client.dto';
 
 @Controller('client')
 export class ClientController {
@@ -25,7 +27,9 @@ export class ClientController {
 
   @Post()
   createClient(@Body() client: ClientDto) {
-    return this.clienteService.createClient(client);
+    return this.clienteService.createClient(client).then((data) => {
+      console.log(data);
+    });
   }
 
   @Put()

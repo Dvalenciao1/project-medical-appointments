@@ -5,8 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MedicalInvoiceModule } from './medical-invoice/medical-invoice.module';
-import { ClientModule } from './client/client.module';
+
+// *Modules
+import { MedicalInvoiceModule } from './module/medical-invoice/medical-invoice.module';
+import { ClientModule } from './module/client/client.module';
 
 @Module({
   imports: [

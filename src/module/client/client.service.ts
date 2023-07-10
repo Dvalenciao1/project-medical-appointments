@@ -1,14 +1,15 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClientDto } from 'src/common/models/dto/Client.dto';
+import { ClientDto } from 'src/module/client/dto/Client.dto';
 import { Client } from 'src/common/models/entity/Client.entity';
 import { Repository } from 'typeorm';
+import { rejects } from 'assert';
 
 @Injectable()
 export class ClientService {
   constructor(
     @InjectRepository(Client)
-    private clientRepository: Repository<Client>,
+    private readonly clientRepository: Repository<Client>,
   ) {}
 
   async findClient(client: ClientDto) {
@@ -26,8 +27,11 @@ export class ClientService {
     return await this.clientRepository.find();
   }
 
-  createClient(client: ClientDto) {
-    return this.clientRepository.save(client);
+  async createClient(client: ClientDto) {
+    return new Promise((resolve, rejects) => {
+      const response = this.clientRepository.save(client);
+      resolve(response);
+    });
   }
 
   async findClientsById(id: number) {

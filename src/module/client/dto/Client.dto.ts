@@ -1,62 +1,61 @@
 import {
   IsBoolean,
   IsDate,
+  IsDateString,
   IsEmail,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsPositive,
   IsString,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 export class ClientDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  id?: number;
+  id: number;
 
   @IsNotEmpty()
   @IsString()
-  first_name!: string;
+  first_name: string;
 
   @IsNotEmpty()
   @IsString()
-  second_name?: string;
+  second_name: string;
 
   @IsNotEmpty()
   @IsString()
-  surname!: string;
+  surname: string;
 
-  @IsNotEmpty()
   @IsString()
-  second_surname!: string;
+  second_surname: string;
 
   @IsNotEmpty()
   @IsNumber()
-  @IsPositive()
-  dni!: number;
+  dni: number;
 
   @IsNotEmpty()
   @IsString()
-  gender!: string;
+  gender: string;
 
   @IsNotEmpty()
-  @IsDate()
-  birth_date!: Date;
+  @IsDateString()
+  birth_date: Date;
 
-  @IsNotEmpty()
   @IsNumber()
-  @IsPositive()
-  phone!: number;
+  phone: number;
 
   @IsNotEmpty()
   @IsString()
-  address!: string;
+  address: string;
 
   @IsNotEmpty()
   @IsEmail()
-  email!: string;
+  email: string;
 
   @IsNotEmpty()
   @IsBoolean()
-  health_insurance!: boolean;
+  health_insurance: boolean;
 }
