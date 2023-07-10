@@ -28,7 +28,7 @@ export class medicalHistory {
   @Column()
   allergies!: string;
 
-  @OneToOne(() => Client)
-  @JoinColumn({ name: 'client_id', referencedColumnName: 'id' })
+  @OneToOne(() => Client, (client) => client.id)
+  @JoinColumn({ name: 'client_id' })
   client!: Client;
 }

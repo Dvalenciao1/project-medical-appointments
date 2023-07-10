@@ -4,8 +4,9 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
-import { medicalAppointment } from './MedicalAppointment.entity';
+
 import { medicalHistory } from './MedicalHistory.entity';
 
 @Entity()
@@ -40,12 +41,9 @@ export class Client {
   @Column()
   address!: string;
 
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Column()
   health_insurance!: boolean;
-
-  @OneToOne(() => medicalHistory)
-  history!: medicalHistory;
 }
