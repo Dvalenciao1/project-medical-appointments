@@ -16,8 +16,8 @@ import { ClientDto } from 'src/module/client/dto/Client.dto';
 export class ClientController {
   constructor(private clienteService: ClientService) {}
   @Get()
-  findClients() {
-    return this.clienteService.findClients();
+  async findClients() {
+    return await this.clienteService.findClients();
   }
 
   @Get('/:id')
@@ -52,9 +52,9 @@ export class ClientController {
   }
 
   @Delete('/:id')
-  deleteClient(@Param('id') id: number) {
+  async deleteClient(@Param('id') id: number) {
     try {
-      return this.clienteService.deleteClient(id);
+      return await this.clienteService.deleteClient(id);
     } catch (error) {
       return { error, message: error.message };
     }

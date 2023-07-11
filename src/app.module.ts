@@ -10,6 +10,7 @@ import { AppService } from './app.service';
 import { MedicalInvoiceModule } from './module/medical-invoice/medical-invoice.module';
 import { ClientModule } from './module/client/client.module';
 import { MedicalHistoryModule } from './module/medical-history/medical-history.module';
+import { MedicalAppointmentModule } from './module/medical-appointment/medical-appointment.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { MedicalHistoryModule } from './module/medical-history/medical-history.m
     MedicalInvoiceModule,
     ClientModule,
     MedicalHistoryModule,
+    MedicalAppointmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
