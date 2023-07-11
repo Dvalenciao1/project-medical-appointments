@@ -6,6 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+// *Modules
+import { MedicalInvoiceModule } from './module/medical-invoice/medical-invoice.module';
+import { ClientModule } from './module/client/client.module';
+import { MedicalHistoryModule } from './module/medical-history/medical-history.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -21,6 +26,9 @@ import { AppService } from './app.service';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    MedicalInvoiceModule,
+    ClientModule,
+    MedicalHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
