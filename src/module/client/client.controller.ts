@@ -6,10 +6,7 @@ import {
   Param,
   Put,
   Delete,
-  ConflictException,
-  NotFoundException,
-  HttpException,
-  HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
@@ -22,9 +19,8 @@ export class ClientController {
     return await this.clienteService.findClients();
   }
 
-  @Get('email')
-  async getClientByEmail(@Body('email') email: string) {
-    console.log(email);
+  @Get('all')
+  async getClientByEmail(@Query('email') email: string) {
     const client = await this.clienteService.findClientByEmail(email);
     return { data: client, message: 'Se ha encontrado una coincidencia' };
   }

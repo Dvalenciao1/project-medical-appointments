@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import { MedicalInvoiceService } from './medical-invoice.service';
 
 @Controller('medical-invoice')
 export class MedicalInvoiceController {
+  constructor(private medicalInvoiceService: MedicalInvoiceService) {}
   @Get()
-  find(): string {
-    return 'Hola mundo';
+  async getInvoices() {
+    return this.medicalInvoiceService.findInvoices();
   }
 }
