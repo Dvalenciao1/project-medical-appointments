@@ -6,9 +6,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
-import { Client } from 'src/common/models/entity/Client.entity';
+import { Client } from 'src/common/models/Client.entity';
 import { Repository } from 'typeorm';
-import { rejects } from 'assert';
 
 @Injectable()
 export class ClientService {

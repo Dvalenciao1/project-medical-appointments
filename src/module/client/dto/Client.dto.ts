@@ -1,6 +1,5 @@
 import {
   IsBoolean,
-  IsDate,
   IsDateString,
   IsEmail,
   IsNotEmpty,
@@ -8,8 +7,6 @@ import {
   IsOptional,
   IsPositive,
   IsString,
-  MaxLength,
-  MinLength,
 } from 'class-validator';
 export class ClientDto {
   @IsOptional()
