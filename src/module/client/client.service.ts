@@ -1,4 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
 import { Client } from 'src/common/models/entity/Client.entity';
@@ -12,39 +17,49 @@ export class ClientService {
     private readonly clientRepository: Repository<Client>,
   ) {}
 
-  async findClient(client: ClientDto) {
-    return await this.clientRepository.findOne({
-      where: [{ id: client.id }, { email: client.email }],
-    });
-  }
-  async findClientByEmail(email: string) {
-    return await this.clientRepository.findOne({
+  async findClientByEmail(email: string): Promise<Client> {
+    const client = await this.clientRepository.findOne({
       where: [{ email }],
     });
+    if (!client) throw new NotFoundException('El usuario no existe');
+    return client;
   }
 
-  async findClients() {
-    return await this.clientRepository.find();
+  async findClients(): Promise<Array<Client>> {
+    const clients = await this.clientRepository.find();
+    return clients;
   }
 
   async createClient(client: ClientDto) {
-    return await this.clientRepository.save(client);
+    try {
+      return await this.clientRepository.save(client);
+    } catch (error) {
+      throw new BadRequestException('Algo salio mal', {
+        description: error.message,
+      });
+    }
   }
 
   async findClientsById(id: number) {
-    return await this.clientRepository.findOne({
+    const client = await this.clientRepository.findOne({
       where: [{ id }],
     });
+    if (!client) throw new NotFoundException('El usuario no existe');
+    return client;
   }
 
   async updateClient(client: ClientDto) {
     let ClientExist = await this.findClientByEmail(client.email);
 
     if (ClientExist && ClientExist.id != client.id) {
-      throw new ConflictException('El client con el email ya existe');
+      throw new ConflictException(
+        'Ese email ya esta vinculado con otra cuenta',
+      );
     }
 
-    return await this.clientRepository.save(client);
+    const data = await this.clientRepository.save(client);
+    if (!data) throw new BadRequestException('Error Server');
+    return data;
   }
 
   async deleteClient(id: number) {

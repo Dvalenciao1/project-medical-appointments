@@ -15,7 +15,7 @@ export class ClientDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  id: number;
+  id?: number;
 
   @IsNotEmpty()
   @IsString()

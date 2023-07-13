@@ -1,6 +1,5 @@
 import {
   IsBoolean,
-  IsDateString,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -8,18 +7,14 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-export class medicalAppointmentDto {
+export class medicalInvoiceDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
   id: number;
 
   @IsNotEmpty()
-  @IsEmail()
-  id_paciente: number;
-
-  @IsNotEmpty()
-  @IsEmail()
+  @IsNumber()
   id_appointment: number;
 
   @IsNotEmpty()
@@ -31,10 +26,10 @@ export class medicalAppointmentDto {
   total_value: number;
 
   @IsNotEmpty()
-  @IsBoolean()
-  : boolean;
-  
+  @IsString()
+  payment_method: string;
+
   @IsNotEmpty()
-  @IsBoolean()
-  appointment_state: boolean;
+  @IsString()
+  type: string;
 }
