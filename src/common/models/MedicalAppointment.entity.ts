@@ -4,10 +4,9 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
-  ManyToOne,
 } from 'typeorm';
 import { Client } from './Client.entity';
-import { Colaborator } from './Colaborator.entity';
+import { Collaborator } from './Collaborator.entity';
 import { medicalInvoice } from './MedicalInvoice.entity';
 
 @Entity()
@@ -24,9 +23,9 @@ export class medicalAppointment {
   @Column()
   state_appointment!: boolean;
 
-  @OneToOne(() => Colaborator)
+  @OneToOne(() => Collaborator)
   @JoinColumn()
-  colaborator!: Colaborator;
+  collaborator!: Collaborator
 
   @OneToOne(() => Client, { cascade: true })
   @JoinColumn()
