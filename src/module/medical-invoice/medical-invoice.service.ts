@@ -17,7 +17,7 @@ export class MedicalInvoiceService {
   }
 
   async createInvoices(invoice: medicalInvoiceDto) {
-    const invoices = await this.medicalInvoiceRepository.find();
+    const invoices = await this.medicalInvoiceRepository.save(invoice);
     return invoices;
   }
 }
