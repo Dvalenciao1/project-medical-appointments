@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsDateString,
   IsNotEmpty,
@@ -6,6 +7,8 @@ import {
   IsOptional,
   IsPositive,
 } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CollaboratorDto } from '../../collaborator/dto/Collaborator.dto';
 
 export class collaboratorScheduleDto {
   @IsOptional()
@@ -14,8 +17,8 @@ export class collaboratorScheduleDto {
   id?: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  collaborator!: number;
+  @Type(() => CollaboratorDto)
+  collaborator!: CollaboratorDto;
 
   @IsNotEmpty()
   @IsDateString()

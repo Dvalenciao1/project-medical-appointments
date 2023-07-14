@@ -17,9 +17,8 @@ export class CollaboratorScheduleService {
   }
 
   async create(collaboratorSchedule: collaboratorScheduleDto) {
-    console.log(collaboratorSchedule);
     const schedules = await this.collaboratorScheduleRepository.save(
-      collaboratorSchedule
+      collaboratorSchedule,
     );
     return schedules;
   }

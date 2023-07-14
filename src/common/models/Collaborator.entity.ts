@@ -23,7 +23,9 @@ export class Collaborator {
 
   @Column({ type: 'varchar', unique: true, nullable: false })
   email!: string;
-  
-  @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator)
-  collaborator!: collaboratorSchedule;
+
+  @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator, {
+    cascade: ['insert'],
+  })
+  schedule!: collaboratorSchedule[];
 }
