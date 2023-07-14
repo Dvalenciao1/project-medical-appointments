@@ -7,7 +7,6 @@ import {
   IsString,
   isEmail,
 } from 'class-validator';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
 export class CollaboratorDto {
   @IsOptional()
   @IsNumber()
