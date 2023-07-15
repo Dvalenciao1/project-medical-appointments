@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Put,
 } from '@nestjs/common';
@@ -51,6 +53,20 @@ export class CollaboratorScheduleController {
           HttpStatus.BAD_REQUEST,
         );
       });
+    return schedule;
+  }
+
+  @Delete('/:id')
+  async deleteSchedule(@Param('id') id: number) {
+    const schedule = await this.scheduleService.delete(id).catch((error) => {
+      throw new HttpException(
+        {
+          message: error.message || errors[error.errno],
+          statusCode: error.errno || error.statusCode,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    });
     return schedule;
   }
 }

@@ -29,4 +29,9 @@ export class CollaboratorScheduleService {
     );
     return schedules;
   }
+  
+  async delete(id: number) {
+    const schedule = await this.collaboratorScheduleRepository.delete({ id });
+    return schedule;
+  }
 }
