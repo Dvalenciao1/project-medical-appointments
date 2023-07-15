@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Collaborator } from 'src/common/models/Collaborator.entity';
 import { Repository } from 'typeorm';
@@ -10,6 +15,11 @@ export class CollaboratorService {
     @InjectRepository(Collaborator)
     private readonly collaboratorRepository: Repository<Collaborator>,
   ) {}
+
+  private readonly ERRORS = {
+    1062: 'Error correo duplicado',
+    1364: 'Error no existe la llave foreana',
+  };
 
   async find(): Promise<Collaborator[]> {
     const collaborators = await this.collaboratorRepository.find();

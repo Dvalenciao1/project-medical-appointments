@@ -22,4 +22,11 @@ export class CollaboratorScheduleService {
     );
     return schedules;
   }
+
+  async update(collaboratorSchedule: collaboratorScheduleDto) {
+    const schedules = await this.collaboratorScheduleRepository.save(
+      collaboratorSchedule,
+    );
+    return schedules;
+  }
 }
