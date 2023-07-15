@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Collaborator } from 'src/common/models/Collaborator.entity';
 import { Repository } from 'typeorm';
@@ -11,22 +16,30 @@ export class CollaboratorService {
     private readonly collaboratorRepository: Repository<Collaborator>,
   ) {}
 
-  async findCollaborators(): Promise<Collaborator[]> {
+  async find(): Promise<Collaborator[]> {
     const collaborators = await this.collaboratorRepository.find();
     return collaborators;
   }
 
-  async createCollaborator(
-    collaborator: CollaboratorDto,
-  ): Promise<Collaborator> {
+  async findOneByEmail(email: string): Promise<Collaborator> {
+    const collaborators = await this.collaboratorRepository.findOne({
+      where: [{ email }],
+    });
+    return collaborators;
+  }
+
+  async create(collaborator: CollaboratorDto): Promise<Collaborator> {
     const collaborators = await this.collaboratorRepository.save(collaborator);
     return collaborators;
   }
 
-  async updateCollaborator(
-    collaborator: CollaboratorDto,
-  ): Promise<Collaborator> {
+  async update(collaborator: CollaboratorDto): Promise<Collaborator> {
     const collaborators = await this.collaboratorRepository.save(collaborator);
     return collaborators;
+  }
+
+  async delete(id: number): Promise<{}> {
+    const collaborators = await this.collaboratorRepository.delete({ id });
+    return { collaborators };
   }
 }

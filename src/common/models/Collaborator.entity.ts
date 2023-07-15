@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { collaboratorSchedule } from './CollaboratorSchedule.entity';
+import { medicalAppointment } from './MedicalAppointment.entity';
 
 @Entity()
 export class Collaborator {
@@ -23,7 +30,22 @@ export class Collaborator {
 
   @Column({ type: 'varchar', unique: true, nullable: false })
   email!: string;
-  
-  @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator)
-  collaborator!: collaboratorSchedule;
+
+  @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator, {
+    cascade: ['insert', 'update'],
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  schedules!: collaboratorSchedule[];
+
+  @OneToMany(
+    () => medicalAppointment,
+    (appointment) => appointment.collaborator,
+    {
+      cascade: ['insert', 'update'],
+      eager: true,
+    },
+  )
+  @JoinColumn()
+  appointments!: medicalAppointment[];
 }

@@ -6,7 +6,10 @@ export class collaboratorSchedule {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @ManyToOne(() => Collaborator, (collaborator) => collaborator.id)
+  @ManyToOne(() => Collaborator, (collaborator) => collaborator.schedules, {
+    cascade: ['insert', 'update'],
+    onDelete: 'CASCADE',
+  })
   collaborator!: Collaborator;
 
   @Column({ type: 'date', nullable: false })
@@ -15,6 +18,6 @@ export class collaboratorSchedule {
   @Column({ type: 'date', nullable: false })
   end_date!: Date;
 
-  @Column({type:'boolean', nullable:false})
+  @Column({ type: 'boolean', nullable: false })
   state!: boolean;
 }

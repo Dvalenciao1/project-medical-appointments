@@ -1,4 +1,6 @@
+import { Type } from 'class-transformer';
 import {
+  IsArray,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -7,7 +9,7 @@ import {
   IsString,
   isEmail,
 } from 'class-validator';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+import { collaboratorScheduleDto } from 'src/module/collaborator-schedule/dto/collaborator-schedule.dto';
 export class CollaboratorDto {
   @IsOptional()
   @IsNumber()
@@ -37,4 +39,7 @@ export class CollaboratorDto {
   @IsNotEmpty()
   @IsEmail()
   email!: string;
+  
+  @Type(()=>collaboratorScheduleDto)
+  schedul!: collaboratorScheduleDto[]
 }

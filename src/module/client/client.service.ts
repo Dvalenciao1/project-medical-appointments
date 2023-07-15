@@ -48,12 +48,8 @@ export class ClientService {
   }
 
   async updateClient(client: ClientDto) {
-    let ClientExist = await this.findClientByEmail(client.email);
-
-    if (ClientExist && ClientExist.id != client.id) {
-      throw new ConflictException(
-        'Ese email ya esta vinculado con otra cuenta',
-      );
+    if (!client.id) {
+      return this.createClient(client);
     }
 
     const data = await this.clientRepository.save(client);
