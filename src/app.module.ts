@@ -13,6 +13,7 @@ import { MedicalHistoryModule } from './module/medical-history/medical-history.m
 import { CollaboratorModule } from './module/collaborator/collaborator.module';
 import { CollaboratorScheduleModule } from './module/collaborator-schedule/collaborator-schedule.module';
 import { ReportModule } from './module/report/report.module';
+import { MedicalScheduleModule } from './module/medical-schedule/medical-schedule.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ReportModule } from './module/report/report.module';
     CollaboratorModule,
     CollaboratorScheduleModule,
     ReportModule,
+    MedicalScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
