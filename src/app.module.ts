@@ -12,6 +12,7 @@ import { ClientModule } from './module/client/client.module';
 import { MedicalHistoryModule } from './module/medical-history/medical-history.module';
 import { CollaboratorModule } from './module/collaborator/collaborator.module';
 import { CollaboratorScheduleModule } from './module/collaborator-schedule/collaborator-schedule.module';
+import { ReportModule } from './module/report/report.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { CollaboratorScheduleModule } from './module/collaborator-schedule/colla
     MedicalHistoryModule,
     CollaboratorModule,
     CollaboratorScheduleModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
