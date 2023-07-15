@@ -1,9 +1,10 @@
 import {
-  Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { medicalSchedule } from './MedicalSchedule.entity';
 
@@ -12,10 +13,13 @@ export class Report {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
-  actual_date!: Date;
-
   @OneToOne(() => medicalSchedule)
-  @JoinColumn({ name: 'schedule_id' })
+  @JoinColumn()
   schedule!: medicalSchedule;
+
+  @CreateDateColumn()
+  createdDate!: Date;
+
+  @UpdateDateColumn()
+  updatedDate!: Date;
 }
