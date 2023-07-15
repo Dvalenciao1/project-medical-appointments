@@ -50,7 +50,7 @@ export class CollaboratorController {
       .catch((error) => {
         throw new HttpException(
           {
-            message: error.message || errors[error.errno],
+            message: errors[error.errno] || error.message,
             statusCode: error.errno || error.statusCode,
           },
           HttpStatus.BAD_REQUEST,
@@ -62,7 +62,10 @@ export class CollaboratorController {
   async deleteCollaborator(@Param('id') id: number) {
     return await this.collaboratorService.delete(id).catch((error) => {
       throw new HttpException(
-        { message: error.message },
+        {
+          message: errors[error.errno] || error.message,
+          statusCode: error.errno || error.statusCode,
+        },
         HttpStatus.BAD_REQUEST,
       );
     });

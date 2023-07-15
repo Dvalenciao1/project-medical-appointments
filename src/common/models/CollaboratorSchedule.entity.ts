@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Collaborator } from './Collaborator.entity';
 
 @Entity()
@@ -12,10 +6,10 @@ export class collaboratorSchedule {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @ManyToOne(() => Collaborator, (collaborator) => collaborator.id, {
-    cascade: ['insert', 'update', 'remove'],
+  @ManyToOne(() => Collaborator, (collaborator) => collaborator.schedules, {
+    cascade: ['insert', 'update'],
+    onDelete: 'CASCADE',
   })
-  @JoinColumn()
   collaborator!: Collaborator;
 
   @Column({ type: 'date', nullable: false })

@@ -34,15 +34,15 @@ export class Collaborator {
   @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator, {
     cascade: ['insert', 'update'],
     eager: true,
+    onDelete: 'CASCADE',
   })
-  @JoinColumn()
   schedules!: collaboratorSchedule[];
 
   @OneToMany(
     () => medicalAppointment,
     (appointment) => appointment.collaborator,
     {
-      cascade: ['insert', 'update', 'remove'],
+      cascade: ['insert', 'update'],
       eager: true,
     },
   )

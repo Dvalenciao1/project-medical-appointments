@@ -16,11 +16,6 @@ export class CollaboratorService {
     private readonly collaboratorRepository: Repository<Collaborator>,
   ) {}
 
-  private readonly ERRORS = {
-    1062: 'Error correo duplicado',
-    1364: 'Error no existe la llave foreana',
-  };
-
   async find(): Promise<Collaborator[]> {
     const collaborators = await this.collaboratorRepository.find();
     return collaborators;
@@ -45,6 +40,6 @@ export class CollaboratorService {
 
   async delete(id: number): Promise<{}> {
     const collaborators = await this.collaboratorRepository.delete({ id });
-    return { is_delete: collaborators.affected == 1 };
+    return { collaborators };
   }
 }
