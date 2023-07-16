@@ -14,6 +14,7 @@ import { CollaboratorModule } from './module/collaborator/collaborator.module';
 import { CollaboratorScheduleModule } from './module/collaborator-schedule/collaborator-schedule.module';
 import { ReportModule } from './module/report/report.module';
 import { MedicalAppointmentModule } from './module/medical-appointment/medical-appointment.module';
+import { MedicalScheduleModule } from './module/medical-schedule/medical-schedule.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { MedicalAppointmentModule } from './module/medical-appointment/medical-a
     CollaboratorScheduleModule,
     ReportModule,
     MedicalAppointmentModule,
+    MedicalScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

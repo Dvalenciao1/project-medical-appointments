@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { medicalAppointment } from './MedicalAppointment.entity';
 
@@ -12,10 +14,19 @@ export class medicalSchedule {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ length: 300 })
-  avalible_appointments?: string;
+  @Column({ type: 'int', nullable: false })
+  avalible_appointments!: number;
+
+  @Column({ type: 'varchar', length: 200 })
+  location!: string;
 
   @OneToOne(() => medicalAppointment)
   @JoinColumn()
   appointment!: medicalAppointment;
+
+  @CreateDateColumn()
+  createdDate!: Date;
+
+  @UpdateDateColumn()
+  updatedDate!: Date;
 }
