@@ -43,7 +43,6 @@ export class Collaborator {
     (appointment) => appointment.collaborator,
     {
       cascade: ['insert', 'update'],
-      eager: true,
     },
   )
   @JoinColumn()

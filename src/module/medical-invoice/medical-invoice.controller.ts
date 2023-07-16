@@ -1,17 +1,60 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { MedicalInvoiceService } from './medical-invoice.service';
 import { medicalInvoiceDto } from './dto/medical-invoice.dto';
+import errors from 'src/utils/errors';
 
 @Controller('medical-invoice')
 export class MedicalInvoiceController {
   constructor(private medicalInvoiceService: MedicalInvoiceService) {}
   @Get()
-  async getInvoices() {
-    return this.medicalInvoiceService.findInvoices();
+  async findInvoices() {
+    return this.medicalInvoiceService.find();
   }
 
   @Post()
   async createInvoice(@Body() invoice: medicalInvoiceDto) {
-    return this.medicalInvoiceService.createInvoices(invoice);
+    return this.medicalInvoiceService.create(invoice).catch((error) => {
+      throw new HttpException(
+        {
+          message: errors[error.errno] || error.message,
+          statusCode: error.errno || error.statusCode,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    });
+  }
+  @Put()
+  async updateInvoice(@Body() invoice: medicalInvoiceDto) {
+    return this.medicalInvoiceService.update(invoice).catch((error) => {
+      throw new HttpException(
+        {
+          message: errors[error.errno] || error.message,
+          statusCode: error.errno || error.statusCode,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    });
+  }
+  @Delete('/:id')
+  async deleteInvoice(@Param('id') id: number) {
+    return this.medicalInvoiceService.delete(id).catch((error) => {
+      throw new HttpException(
+        {
+          message: errors[error.errno] || error.message,
+          statusCode: error.errno || error.statusCode,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    });
   }
 }

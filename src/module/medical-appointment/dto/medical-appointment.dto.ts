@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDateString,
@@ -8,29 +9,33 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
+import { Client } from 'src/common/models/Client.entity';
+import { Collaborator } from 'src/common/models/Collaborator.entity';
+import { medicalInvoice } from 'src/common/models/MedicalInvoice.entity';
 export class medicalAppointmentDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  id: number;
-
-  @IsNotEmpty()
-  @IsEmail()
-  id_paciente: number;
-
-  @IsNotEmpty()
-  @IsEmail()
-  id_colaborator: number;
+  id!: number;
 
   @IsNotEmpty()
   @IsDateString()
-  appointment_date: Date;
+  appointment_date!: Date;
 
   @IsNotEmpty()
   @IsString()
-  appointment_location: string;
+  appointment_location!: string;
 
   @IsNotEmpty()
   @IsBoolean()
-  appointment_state: boolean;
+  appointment_state!: boolean;
+
+  @Type(() => Client)
+  client!: Client;
+
+  @Type(() => Collaborator)
+  collaborator!: Collaborator;
+
+  @Type(() => medicalInvoice)
+  invoice!: medicalInvoice;
 }

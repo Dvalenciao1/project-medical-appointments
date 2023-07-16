@@ -15,23 +15,23 @@ export class medicalAppointment {
   id?: number;
 
   @Column()
-  date_appointment!: Date;
+  appointment_date!: Date;
 
   @Column()
-  location_appointment!: string;
+  appointment_location!: string;
 
   @Column()
-  state_appointment!: boolean;
+  appointment_state!: boolean;
 
-  @OneToOne(() => Collaborator)
+  @OneToOne(() => Collaborator, { cascade: true, eager: true })
   @JoinColumn()
-  collaborator!: Collaborator
+  collaborator!: Collaborator;
 
-  @OneToOne(() => Client, { cascade: true })
+  @OneToOne(() => Client, { cascade: true, eager: true })
   @JoinColumn()
   client!: Client;
 
-  @OneToOne(() => medicalInvoice)
-  @JoinColumn({ name: 'invoice_id' })
+  @OneToOne(() => medicalInvoice, { cascade: true, eager: true })
+  @JoinColumn()
   invoice!: medicalInvoice;
 }
