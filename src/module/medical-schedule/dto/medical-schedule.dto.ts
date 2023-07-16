@@ -1,15 +1,13 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsBoolean,
-  IsDateString,
-  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
-import { medicalAppointment } from 'src/common/models/MedicalAppointment.entity';
+import { medicalAppointmentDto } from 'src/module/medical-appointment/dto/medical-appointment.dto';
 
 export class medicalScheduleDto {
   @IsOptional()
@@ -17,14 +15,17 @@ export class medicalScheduleDto {
   @IsPositive()
   id?: number;
 
+  @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
   avalible_appointments!: number;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   location!: string;
 
-  @Type(() => medicalAppointment)
-  appointment!: medicalAppointment;
+  @ApiProperty()
+  @Type(() => medicalAppointmentDto)
+  appointment!: medicalAppointmentDto;
 }

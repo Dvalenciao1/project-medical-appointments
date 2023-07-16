@@ -1,41 +1,47 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDateString,
-  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
-import { Client } from 'src/common/models/Client.entity';
-import { Collaborator } from 'src/common/models/Collaborator.entity';
-import { medicalInvoice } from 'src/common/models/MedicalInvoice.entity';
+import { ClientDto } from 'src/module/client/dto/Client.dto';
+import { CollaboratorDto } from 'src/module/collaborator/dto/Collaborator.dto';
+import { medicalInvoiceDto } from 'src/module/medical-invoice/dto/medical-invoice.dto';
 export class medicalAppointmentDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
   id!: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   appointment_date!: Date;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   appointment_location!: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   appointment_state!: boolean;
 
-  @Type(() => Client)
-  client!: Client;
+  @ApiProperty()
+  @Type(() => ClientDto)
+  client!: ClientDto;
 
-  @Type(() => Collaborator)
-  collaborator!: Collaborator;
+  @ApiProperty()
+  @Type(() => CollaboratorDto)
+  collaborator!: CollaboratorDto;
 
-  @Type(() => medicalInvoice)
-  invoice!: medicalInvoice;
+  @ApiProperty()
+  @Type(() => medicalInvoiceDto)
+  invoice!: medicalInvoiceDto;
 }

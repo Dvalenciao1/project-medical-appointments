@@ -10,10 +10,13 @@ import {
   Put,
 } from '@nestjs/common';
 import { CollaboratorScheduleService } from './collaborator-schedule.service';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+
 import { collaboratorScheduleDto } from './dto/collaborator-schedule.dto';
 import errors from 'src/utils/errors';
+import { ApiTags } from '@nestjs/swagger';
+import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
 
+@ApiTags('Collaborator Schedule')
 @Controller('collaborator-schedule')
 export class CollaboratorScheduleController {
   constructor(private scheduleService: CollaboratorScheduleService) {}

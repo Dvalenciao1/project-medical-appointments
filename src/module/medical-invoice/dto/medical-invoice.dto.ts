@@ -1,6 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsBoolean,
-  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -13,22 +12,27 @@ export class medicalInvoiceDto {
   @IsPositive()
   id: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   id_appointment: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   description: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   total_value: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   payment_method: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   type: string;

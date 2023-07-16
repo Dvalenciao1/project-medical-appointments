@@ -12,7 +12,9 @@ import {
 import { MedicalInvoiceService } from './medical-invoice.service';
 import { medicalInvoiceDto } from './dto/medical-invoice.dto';
 import errors from 'src/utils/errors';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Medical Invoice')
 @Controller('medical-invoice')
 export class MedicalInvoiceController {
   constructor(private medicalInvoiceService: MedicalInvoiceService) {}

@@ -13,7 +13,9 @@ import errors from 'src/utils/errors';
 import { MedicalScheduleService } from './medical-schedule.service';
 import { medicalScheduleDto } from './dto/medical-schedule.dto';
 import { medicalSchedule } from 'src/common/models/MedicalSchedule.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Medica Schedule')
 @Controller('medical-schedule')
 export class MedicalScheduleController {
   constructor(

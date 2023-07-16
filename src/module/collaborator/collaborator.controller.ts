@@ -13,7 +13,9 @@ import {
 import { CollaboratorService } from './collaborator.service';
 import { CollaboratorDto } from './dto/Collaborator.dto';
 import errors from 'src/utils/errors';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Collaborator')
 @Controller('collaborator')
 export class CollaboratorController {
   constructor(private collaboratorService: CollaboratorService) {}

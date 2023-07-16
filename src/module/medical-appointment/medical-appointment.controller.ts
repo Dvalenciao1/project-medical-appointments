@@ -12,7 +12,9 @@ import {
 import errors from 'src/utils/errors';
 import { MedicalAppointmentService } from './medical-appointment.service';
 import { medicalAppointmentDto } from './dto/medical-appointment.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Medical Appointment')
 @Controller('medical-appointment')
 export class MedicalAppointmentController {
   constructor(private medicalAppointmentService: MedicalAppointmentService) {}

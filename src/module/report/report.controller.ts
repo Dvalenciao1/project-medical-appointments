@@ -13,7 +13,9 @@ import { ReportService } from './report.service';
 import { Report } from 'src/common/models/Report.entity';
 import { ReportDto } from './dto/report.dto';
 import errors from 'src/utils/errors';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Report')
 @Controller('report')
 export class ReportController {
   constructor(private readonly reportService: ReportService) {}

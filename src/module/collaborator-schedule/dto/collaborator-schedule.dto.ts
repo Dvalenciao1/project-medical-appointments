@@ -1,5 +1,4 @@
 import {
-  IsArray,
   IsBoolean,
   IsDateString,
   IsNotEmpty,
@@ -9,6 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CollaboratorDto } from '../../collaborator/dto/Collaborator.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class collaboratorScheduleDto {
   @IsOptional()
@@ -20,14 +20,17 @@ export class collaboratorScheduleDto {
   @Type(() => CollaboratorDto)
   collaborator!: CollaboratorDto;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   start_date!: Date;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   end_date!: Date;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   state!: boolean;
