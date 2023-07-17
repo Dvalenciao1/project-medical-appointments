@@ -43,6 +43,7 @@ export class Collaborator {
     (appointment) => appointment.collaborator,
     {
       cascade: ['insert', 'update'],
+      onDelete: 'CASCADE',
     },
   )
   @JoinColumn()

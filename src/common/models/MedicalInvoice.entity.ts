@@ -24,7 +24,11 @@ export class medicalInvoice {
   @Column()
   type!: string;
 
-  @OneToOne(() => medicalAppointment)
+  @OneToOne(() => medicalAppointment, {
+    cascade: ['insert', 'update'],
+    eager: true,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   appointment!: medicalAppointment;
 }

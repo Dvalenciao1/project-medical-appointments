@@ -21,7 +21,7 @@ export class ClientController {
     return await this.clienteService.findClients();
   }
 
-  @Get('all')
+  @Get('email')
   async getClientByEmail(@Query('email') email: string) {
     const client = await this.clienteService.findClientByEmail(email);
     return { data: client, message: 'Se ha encontrado una coincidencia' };
