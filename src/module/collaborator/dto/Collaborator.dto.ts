@@ -48,7 +48,6 @@ export class CollaboratorDto {
   email!: string;
 
   @ApiProperty()
-  @IsArray()
   @Type(() => collaboratorSchedule)
   schedule!: collaboratorSchedule[];
 }

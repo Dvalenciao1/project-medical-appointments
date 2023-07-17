@@ -1,6 +1,4 @@
-import {
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Collaborator } from 'src/common/models/Collaborator.entity';
 import { Repository } from 'typeorm';

@@ -36,7 +36,7 @@ export class Collaborator {
     eager: true,
     onDelete: 'CASCADE',
   })
-  schedules!: collaboratorSchedule[];
+  schedules?: collaboratorSchedule[];
 
   @OneToMany(
     () => medicalAppointment,
