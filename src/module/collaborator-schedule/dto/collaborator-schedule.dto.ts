@@ -33,5 +33,5 @@ export class collaboratorScheduleDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  state!: boolean;
+  is_available!: boolean;
 }

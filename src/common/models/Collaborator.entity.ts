@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { collaboratorSchedule } from './CollaboratorSchedule.entity';
 import { medicalAppointment } from './MedicalAppointment.entity';
+import { roles } from '../enums/collaborator.enums';
 
 @Entity()
 export class Collaborator {
@@ -19,8 +20,8 @@ export class Collaborator {
   @Column({ type: 'varchar', length: 50, nullable: false })
   surname!: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  rol!: string;
+  @Column({ type: 'enum', enum:roles, nullable: false })
+  rol!: roles;
 
   @Column({ type: 'varchar', length: 50, nullable: false })
   department!: string;

@@ -8,19 +8,18 @@ import {
 } from 'typeorm';
 import { Client } from './Client.entity';
 import { Collaborator } from './Collaborator.entity';
-import { medicalInvoice } from './MedicalInvoice.entity';
 
 @Entity()
 export class medicalAppointment {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
+  @Column({ type: 'datetime', nullable: false })
   appointment_date!: Date;
 
-  @Column()
+  @Column({ type: 'varchar', length: 230, nullable: false })
   appointment_location!: string;
-
+  
   @Column()
   appointment_state!: boolean;
 

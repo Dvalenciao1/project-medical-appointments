@@ -4,12 +4,14 @@ import {
   IsDate,
   IsDateString,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
+import { genders } from 'src/common/enums/client.enums';
 export class ClientDto {
   @IsOptional()
   @IsNumber()
@@ -40,10 +42,10 @@ export class ClientDto {
   @IsNumber()
   dni: number;
 
-  @ApiProperty()
+  @ApiProperty({ enum: genders })
   @IsNotEmpty()
-  @IsString()
-  gender: string;
+  @IsEnum(genders)
+  gender: genders;
 
   @ApiProperty()
   @IsNotEmpty()

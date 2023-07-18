@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { genders } from '../enums/client.enums';
 
 @Entity()
 export class Client {
@@ -20,8 +21,8 @@ export class Client {
   @Column({ type: 'int', width: 10, nullable: false })
   dni!: number;
 
-  @Column({ type: 'varchar', length: 6, nullable: false })
-  gender!: string;
+  @Column({ type: 'enum', enum: genders, nullable: false })
+  gender!: genders;
 
   @Column({ type: 'date', nullable: false })
   birth_date!: Date;

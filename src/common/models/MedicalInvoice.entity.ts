@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { medicalAppointment } from './MedicalAppointment.entity';
+import { types } from 'src/common/enums/invoice.enums';
 
 @Entity()
 export class medicalInvoice {
@@ -21,8 +22,8 @@ export class medicalInvoice {
   @Column()
   payment_method!: string;
 
-  @Column()
-  type!: string;
+  @Column({ type: 'enum', enum: types })
+  type!: types;
 
   @OneToOne(() => medicalAppointment, {
     cascade: ['insert', 'update'],
