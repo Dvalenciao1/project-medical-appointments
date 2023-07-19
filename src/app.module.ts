@@ -10,6 +10,11 @@ import { AppService } from './app.service';
 import { MedicalInvoiceModule } from './module/medical-invoice/medical-invoice.module';
 import { ClientModule } from './module/client/client.module';
 import { MedicalHistoryModule } from './module/medical-history/medical-history.module';
+import { CollaboratorModule } from './module/collaborator/collaborator.module';
+import { CollaboratorScheduleModule } from './module/collaborator-schedule/collaborator-schedule.module';
+import { ReportModule } from './module/report/report.module';
+import { MedicalAppointmentModule } from './module/medical-appointment/medical-appointment.module';
+import { MedicalScheduleModule } from './module/medical-schedule/medical-schedule.module';
 
 @Module({
   imports: [
@@ -29,6 +34,11 @@ import { MedicalHistoryModule } from './module/medical-history/medical-history.m
     MedicalInvoiceModule,
     ClientModule,
     MedicalHistoryModule,
+    CollaboratorModule,
+    CollaboratorScheduleModule,
+    ReportModule,
+    MedicalAppointmentModule,
+    MedicalScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

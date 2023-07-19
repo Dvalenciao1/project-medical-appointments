@@ -10,16 +10,18 @@ import {
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Client')
 @Controller('client')
 export class ClientController {
   constructor(private clienteService: ClientService) {}
+
   @Get()
   async findClients() {
     return await this.clienteService.findClients();
   }
 
-  @Get('all')
+  @Get('email')
   async getClientByEmail(@Query('email') email: string) {
     const client = await this.clienteService.findClientByEmail(email);
     return { data: client, message: 'Se ha encontrado una coincidencia' };

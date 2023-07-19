@@ -6,9 +6,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
-import { Client } from 'src/common/models/entity/Client.entity';
+import { Client } from 'src/common/models/Client.entity';
 import { Repository } from 'typeorm';
-import { rejects } from 'assert';
 
 @Injectable()
 export class ClientService {
@@ -49,12 +48,8 @@ export class ClientService {
   }
 
   async updateClient(client: ClientDto) {
-    let ClientExist = await this.findClientByEmail(client.email);
-
-    if (ClientExist && ClientExist.id != client.id) {
-      throw new ConflictException(
-        'Ese email ya esta vinculado con otra cuenta',
-      );
+    if (!client.id) {
+      return this.createClient(client);
     }
 
     const data = await this.clientRepository.save(client);
