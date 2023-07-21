@@ -24,7 +24,7 @@ export class ClientService {
     return client;
   }
 
-  async findClients(): Promise<Array<Client>> {
+  async findClients(): Promise<Client[]> {
     const clients = await this.clientRepository.find();
     return clients;
   }
