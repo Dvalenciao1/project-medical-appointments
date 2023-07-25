@@ -5,9 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClientDto } from 'src/module/client/dto/Client.dto';
+import { ClientDto, CreateClientDto } from 'src/module/client/dto/Client.dto';
 import { Client } from 'src/common/models/Client.entity';
 import { Repository } from 'typeorm';
+import { ClientSerializer } from 'src/common/serializer/client.serializer';
 
 @Injectable()
 export class ClientService {
@@ -29,7 +30,7 @@ export class ClientService {
     return clients;
   }
 
-  async createClient(client: ClientDto) {
+  async createClient(client: CreateClientDto): Promise<Client> {
     try {
       return await this.clientRepository.save(client);
     } catch (error) {
@@ -39,7 +40,7 @@ export class ClientService {
     }
   }
 
-  async findClientsById(id: number) {
+  async findClientsById(id: number): Promise<Client> {
     const client = await this.clientRepository.findOne({
       where: [{ id }],
     });
@@ -47,7 +48,7 @@ export class ClientService {
     return client;
   }
 
-  async updateClient(client: ClientDto) {
+  async updateClient(client: ClientDto): Promise<Client> {
     if (!client.id) {
       return this.createClient(client);
     }
@@ -57,13 +58,13 @@ export class ClientService {
     return data;
   }
 
-  async deleteClient(id: number) {
+  async deleteClient(id: number): Promise<boolean> {
     const ClientExist = await this.findClientsById(id);
 
     if (!ClientExist) {
       throw new ConflictException('El cliente con el id no existe');
     }
     const rows = await this.clientRepository.delete({ id });
-    return { client_email: ClientExist.email, is_delete: rows.affected == 1 };
+    return rows.affected == 1;
   }
 }
