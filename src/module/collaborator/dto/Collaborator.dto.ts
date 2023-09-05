@@ -18,16 +18,6 @@ export class CollaboratorDto {
   @IsPositive()
   id?: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  first_name!: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  surname!: string;
-
   @ApiProperty({ enum: [roles] })
   @IsNotEmpty()
   @IsEnum(roles)

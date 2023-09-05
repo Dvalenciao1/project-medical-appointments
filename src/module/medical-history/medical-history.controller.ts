@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { MedicalHistoryService } from './medical-history.service';
-import { medicalHistory } from 'src/common/models/MedicalHistory.entity';
+import { medicalHistory } from 'src/module/medical-history/entity/MedicalHistory.entity';
 import { medicalHistoryDto } from './dto/medical-history.dto';
 
 @ApiTags('Medical History')
@@ -42,7 +42,7 @@ export class MedicalHistoryController {
   }
 
   @Delete('/:id')
-  deleteHistory(@Param('id') id: number): Promise<{}> {
+  deleteHistory(@Param('id') id: number) {
     const data = this.medicalHistoryServices.delete(id);
     return data;
   }

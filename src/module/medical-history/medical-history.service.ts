@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { medicalHistory } from 'src/common/models/MedicalHistory.entity';
+import { medicalHistory } from 'src/module/medical-history/entity/MedicalHistory.entity';
 import { Repository } from 'typeorm';
 import { medicalHistoryDto } from './dto/medical-history.dto';
 import errors from 'src/utils/errors';
