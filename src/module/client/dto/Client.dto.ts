@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsBoolean,
-  IsDateString,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -10,6 +8,7 @@ import {
   IsString,
   IsStrongPassword,
 } from 'class-validator';
+
 export class ClientDto {
   @IsOptional()
   @IsNumber()

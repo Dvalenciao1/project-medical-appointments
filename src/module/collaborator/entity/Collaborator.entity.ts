@@ -4,11 +4,9 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
-  OneToOne,
 } from 'typeorm';
-import { collaboratorSchedule } from '../../collaborator-schedule/entity/CollaboratorSchedule.entity';
-import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
-
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
+import { medicalAppointment } from 'src/module/medical-appointment/entity/MedicalAppointment.entity';
 @Entity()
 export class Collaborator {
   @PrimaryGeneratedColumn()
@@ -25,13 +23,14 @@ export class Collaborator {
     eager: true,
     onDelete: 'CASCADE',
   })
-  schedules!: collaboratorSchedule[];
+  schedules?: collaboratorSchedule[];
 
   @OneToMany(
     () => medicalAppointment,
     (appointment) => appointment.collaborator,
     {
       cascade: ['insert', 'update'],
+      onDelete: 'CASCADE',
     },
   )
   @JoinColumn()

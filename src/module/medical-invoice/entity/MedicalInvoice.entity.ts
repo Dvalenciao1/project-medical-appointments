@@ -5,7 +5,8 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
+import { medicalAppointment } from 'src/module/medical-appointment/entity/MedicalAppointment.entity';
+import { types } from 'src/common/enums/invoice.enums';
 
 @Entity()
 export class medicalInvoice {
@@ -21,10 +22,14 @@ export class medicalInvoice {
   @Column()
   payment_method!: string;
 
-  @Column()
-  type!: string;
+  @Column({ type: 'enum', enum: types })
+  type!: types;
 
-  @OneToOne(() => medicalAppointment)
+  @OneToOne(() => medicalAppointment, {
+    cascade: ['insert', 'update'],
+    eager: true,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   appointment!: medicalAppointment;
 }

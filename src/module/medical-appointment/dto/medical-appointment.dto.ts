@@ -40,8 +40,4 @@ export class medicalAppointmentDto {
   @ApiProperty()
   @Type(() => CollaboratorDto)
   collaborator!: CollaboratorDto;
-
-  @ApiProperty()
-  @Type(() => medicalInvoiceDto)
-  invoice!: medicalInvoiceDto;
 }

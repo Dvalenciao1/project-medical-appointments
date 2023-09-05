@@ -19,5 +19,5 @@ export class collaboratorSchedule {
   end_date!: Date;
 
   @Column({ type: 'boolean', nullable: false })
-  state!: boolean;
+  is_available!: boolean;
 }

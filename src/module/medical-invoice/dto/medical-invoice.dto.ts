@@ -1,11 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
+import { types } from 'src/common/enums/invoice.enums';
 export class medicalInvoiceDto {
   @IsOptional()
   @IsNumber()
@@ -32,8 +35,8 @@ export class medicalInvoiceDto {
   @IsString()
   payment_method: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: [types] })
   @IsNotEmpty()
-  @IsString()
-  type: string;
+  @IsEnum(types)
+  type: types;
 }
