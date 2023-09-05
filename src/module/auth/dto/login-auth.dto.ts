@@ -1,21 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsBoolean,
-  IsDateString,
-  IsEmail,
   IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsPositive,
+  IsEmail,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
-export class ClientDto {
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
-  id?: number;
 
+export class LoginAuthDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
@@ -24,6 +15,5 @@ export class ClientDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @IsStrongPassword()
   password: string;
 }

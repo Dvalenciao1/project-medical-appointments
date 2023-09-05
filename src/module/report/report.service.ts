@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ReportDto } from './dto/report.dto';
-import { Report } from 'src/common/models/Report.entity';
+import { Report } from 'src/module/report/entity/Report.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

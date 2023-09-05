@@ -9,7 +9,7 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
 import { collaboratorScheduleDto } from 'src/module/collaborator-schedule/dto/collaborator-schedule.dto';
 export class CollaboratorDto {
   @IsOptional()

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { medicalScheduleDto } from './dto/medical-schedule.dto';
-import { medicalSchedule } from 'src/common/models/MedicalSchedule.entity';
+import { medicalSchedule } from 'src/module/medical-schedule/entity/MedicalSchedule.entity';
 
 @Injectable()
 export class MedicalScheduleService {

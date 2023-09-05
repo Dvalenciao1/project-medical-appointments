@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Collaborator } from './Collaborator.entity';
+import { Collaborator } from '../../collaborator/entity/Collaborator.entity';
 
 @Entity()
 export class collaboratorSchedule {

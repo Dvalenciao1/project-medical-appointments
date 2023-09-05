@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { medicalAppointment } from 'src/common/models/MedicalAppointment.entity';
+import { medicalAppointment } from 'src/module/medical-appointment/entity/MedicalAppointment.entity';
 import { Repository } from 'typeorm';
 import { medicalAppointmentDto } from './dto/medical-appointment.dto';
 

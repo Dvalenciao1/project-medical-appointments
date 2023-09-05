@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { medicalAppointment } from './MedicalAppointment.entity';
+import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
 
 @Entity()
 export class medicalSchedule {

@@ -5,9 +5,9 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Client } from './Client.entity';
-import { Collaborator } from './Collaborator.entity';
-import { medicalInvoice } from './MedicalInvoice.entity';
+import { Client } from '../../client/entity/Client.entity';
+import { Collaborator } from '../../collaborator/entity/Collaborator.entity';
+import { medicalInvoice } from '../../medical-invoice/entity/MedicalInvoice.entity';
 
 @Entity()
 export class medicalAppointment {

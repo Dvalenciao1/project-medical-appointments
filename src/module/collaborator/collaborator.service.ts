@@ -1,8 +1,6 @@
-import {
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Collaborator } from 'src/common/models/Collaborator.entity';
+import { Collaborator } from 'src/module/collaborator/entity/Collaborator.entity';
 import { Repository } from 'typeorm';
 import { CollaboratorDto } from './dto/Collaborator.dto';
 
@@ -15,13 +13,6 @@ export class CollaboratorService {
 
   async find(): Promise<Collaborator[]> {
     const collaborators = await this.collaboratorRepository.find();
-    return collaborators;
-  }
-
-  async findOneByEmail(email: string): Promise<Collaborator> {
-    const collaborators = await this.collaboratorRepository.findOne({
-      where: [{ email }],
-    });
     return collaborators;
   }
 
