@@ -21,6 +21,11 @@ export class MedicalAppointmentService {
     return appointment;
   }
 
+  async create(appointment: any) {
+    const res = await this.medicalAppointmentRepository.save(appointment);
+    return res;
+  }
+
   /* async create(appointment: medicalAppointmentDto): Promise<medicalAppointmentDto> {
     const data = await this.medicalAppointmentRepository.save(appointment);
     return data;

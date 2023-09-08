@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Client } from 'src/module/client/entity/Client.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { RegisterAuthDto } from '../auth/dto/register-auth.dto';
 
 @Injectable()
@@ -24,8 +24,10 @@ export class ClientService {
     return client;
   }
 
-  async findClients(): Promise<Array<Client>> {
-    const clients = await this.clientRepository.find();
+  async findClientsDoctor() {
+    const clients = await this.clientRepository.find({
+      where: { collaborator: Not('Null') },
+    });
     return clients;
   }
 

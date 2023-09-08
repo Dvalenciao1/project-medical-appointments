@@ -27,6 +27,12 @@ export class MedicalAppointmentController {
     return await this.medicalAppointmentService.find(appointmentDto);
   }
 
+  @Post()
+  @UseGuards(AuthGuard)
+  async createAppointment(@Body() appointment: any) {
+    return await this.medicalAppointmentService.create(appointment);
+  }
+
   /* @Post()
   async createInvoice(@Body() appointment: medicalAppointmentDto) {
     return this.medicalAppointmentService.create(appointment).catch((error) => {

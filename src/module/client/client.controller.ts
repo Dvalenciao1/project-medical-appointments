@@ -19,9 +19,9 @@ import { RegisterAuthDto } from '../auth/dto/register-auth.dto';
 export class ClientController {
   constructor(private clienteService: ClientService) {}
 
-  @Get()
-  async findClients() {
-    return await this.clienteService.findClients();
+  @Get('/doctor')
+  async findClientsDoctor() {
+    return await this.clienteService.findClientsDoctor();
   }
 
   @Get('/:email')
