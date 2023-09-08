@@ -52,8 +52,9 @@ export class AuthService {
       {
         token: token,
         ...client,
+        role: !client.collaborator ? 'client' : client.collaborator.role,
       },
-      { excludeExtraneousValues: true },
+      { excludeExtraneousValues: true, enableImplicitConversion: true },
     );
   }
 

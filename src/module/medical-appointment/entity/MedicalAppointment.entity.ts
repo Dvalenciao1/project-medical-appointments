@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { Client } from '../../client/entity/Client.entity';
 import { Collaborator } from '../../collaborator/entity/Collaborator.entity';
@@ -14,24 +15,21 @@ export class medicalAppointment {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
+  @Column({ type: 'datetime', nullable: false })
   appointment_date!: Date;
 
-  @Column()
-  appointment_location!: string;
-
-  @Column()
+  @Column({ type: 'boolean', nullable: true })
   appointment_state!: boolean;
 
-  @OneToOne(() => Collaborator, { cascade: true, eager: true })
-  @JoinColumn()
+  @ManyToOne(() => Collaborator, (collaborator) => collaborator.appointments, {
+    eager: true,
+  })
   collaborator!: Collaborator;
 
-  @OneToOne(() => Client, { cascade: true, eager: true })
-  @JoinColumn()
+  @ManyToOne(() => Client, (client) => client.appointments)
   client!: Client;
 
-  @OneToOne(() => medicalInvoice, { cascade: true, eager: true })
+  @OneToOne(() => medicalInvoice, { cascade: true })
   @JoinColumn()
   invoice!: medicalInvoice;
 }

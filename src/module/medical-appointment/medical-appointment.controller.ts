@@ -8,22 +8,26 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import errors from 'src/utils/errors';
 import { MedicalAppointmentService } from './medical-appointment.service';
-import { medicalAppointmentDto } from './dto/medical-appointment.dto';
+
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/guard/auth.guard';
+import { AppointmentDto } from './dto/appointment.dto';
 
 @ApiTags('Medical Appointment')
 @Controller('medical-appointment')
 export class MedicalAppointmentController {
   constructor(private medicalAppointmentService: MedicalAppointmentService) {}
-  @Get()
-  async findInvoices() {
-    return this.medicalAppointmentService.find();
+  @Post()
+  @UseGuards(AuthGuard)
+  async findInvoices(@Body() appointmentDto: AppointmentDto) {
+    return await this.medicalAppointmentService.find(appointmentDto);
   }
 
-  @Post()
+  /* @Post()
   async createInvoice(@Body() appointment: medicalAppointmentDto) {
     return this.medicalAppointmentService.create(appointment).catch((error) => {
       throw new HttpException(
@@ -46,7 +50,7 @@ export class MedicalAppointmentController {
         HttpStatus.BAD_REQUEST,
       );
     });
-  }
+  } */
   @Delete('/:id')
   async deleteInvoice(@Param('id') id: number) {
     return this.medicalAppointmentService.delete(id).catch((error) => {

@@ -20,6 +20,11 @@ export class RegisterAuthDto {
   email: string;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  dni: string;
+
+  @ApiProperty()
   @Transform(({ value }) => value.trim())
   @IsNotEmpty()
   @IsString()

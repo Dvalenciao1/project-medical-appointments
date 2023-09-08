@@ -24,9 +24,9 @@ export class ClientController {
     return await this.clienteService.findClients();
   }
 
-  @Get('all')
+  @Get('/:email')
   @UseGuards(AuthGuard)
-  async getClientByEmail(@Query('email') email: string) {
+  async getClientByEmail(@Param('email') email: string) {
     const client = await this.clienteService.findClientByEmail(email);
     return { data: client, message: 'Se ha encontrado una coincidencia' };
   }

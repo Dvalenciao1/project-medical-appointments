@@ -24,12 +24,4 @@ export class medicalInvoice {
 
   @Column({ type: 'enum', enum: types })
   type!: types;
-
-  @OneToOne(() => medicalAppointment, {
-    cascade: ['insert', 'update'],
-    eager: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn()
-  appointment!: medicalAppointment;
 }
