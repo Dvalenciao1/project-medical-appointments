@@ -10,7 +10,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { ReportService } from './report.service';
-import { Report } from 'src/common/models/Report.entity';
+import { Report } from 'src/module/report/entity/Report.entity';
 import { ReportDto } from './dto/report.dto';
 import errors from 'src/utils/errors';
 import { ApiTags } from '@nestjs/swagger';

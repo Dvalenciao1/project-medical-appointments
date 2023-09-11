@@ -7,11 +7,9 @@ import {
   IsNumber,
   IsOptional,
   IsPositive,
-  IsString,
 } from 'class-validator';
 import { ClientDto } from 'src/module/client/dto/Client.dto';
 import { CollaboratorDto } from 'src/module/collaborator/dto/Collaborator.dto';
-import { medicalInvoiceDto } from 'src/module/medical-invoice/dto/medical-invoice.dto';
 export class medicalAppointmentDto {
   @IsOptional()
   @IsNumber()
@@ -22,11 +20,6 @@ export class medicalAppointmentDto {
   @IsNotEmpty()
   @IsDateString()
   appointment_date!: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  appointment_location!: string;
 
   @ApiProperty()
   @IsNotEmpty()

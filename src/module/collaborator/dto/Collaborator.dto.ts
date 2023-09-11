@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsArray,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -11,23 +10,13 @@ import {
   IsString,
 } from 'class-validator';
 import { roles } from 'src/common/enums/collaborator.enums';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
 
 export class CollaboratorDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
   id?: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  first_name!: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  surname!: string;
 
   @ApiProperty({ enum: [roles] })
   @IsNotEmpty()

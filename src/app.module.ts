@@ -15,6 +15,7 @@ import { CollaboratorScheduleModule } from './module/collaborator-schedule/colla
 import { ReportModule } from './module/report/report.module';
 import { MedicalAppointmentModule } from './module/medical-appointment/medical-appointment.module';
 import { MedicalScheduleModule } from './module/medical-schedule/medical-schedule.module';
+import { AuthModule } from './module/auth/auth.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { MedicalScheduleModule } from './module/medical-schedule/medical-schedul
     ReportModule,
     MedicalAppointmentModule,
     MedicalScheduleModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
