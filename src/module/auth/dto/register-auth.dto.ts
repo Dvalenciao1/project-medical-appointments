@@ -30,7 +30,4 @@ export class RegisterAuthDto {
   @IsString()
   @IsStrongPassword()
   password: string;
-
-  @Exclude()
-  collaborator: Collaborator;
 }

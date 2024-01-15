@@ -26,3 +26,22 @@ export class ClientDto {
   @IsStrongPassword()
   password: string;
 }
+
+export class CreateClientDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsStrongPassword()
+  password: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+  
+  @IsString()
+  @IsNotEmpty()
+  fullname: string;
+  
+  @IsString()
+  @IsNotEmpty()
+  dni: string;
+}
