@@ -11,7 +11,7 @@ import {
   IsString,
 } from 'class-validator';
 import { roles } from 'src/common/enums/collaborator.enums';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
 
 export class CollaboratorDto {
   @IsOptional()

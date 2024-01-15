@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { collaboratorSchedule } from 'src/common/models/CollaboratorSchedule.entity';
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
 import { Repository } from 'typeorm';
 import { collaboratorScheduleDto } from './dto/collaborator-schedule.dto';
 

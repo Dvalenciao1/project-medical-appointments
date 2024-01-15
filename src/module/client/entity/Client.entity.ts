@@ -1,7 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { genders } from '../enums/client.enums';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  DeleteDateColumn,
+} from 'typeorm';
+import { genders } from '../../../common/enums/client.enums';
 
 @Entity()
+@Unique('Email', ['email'])
 export class Client {
   @PrimaryGeneratedColumn()
   id?: number;
@@ -33,9 +40,12 @@ export class Client {
   @Column({ type: 'varchar', length: 50, nullable: false })
   address!: string;
 
-  @Column({ type: 'varchar', unique: true, nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   email!: string;
 
   @Column({ type: 'boolean', nullable: false })
   health_insurance!: boolean;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

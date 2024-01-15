@@ -6,8 +6,8 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
-import { Client } from './Client.entity';
-import { Collaborator } from './Collaborator.entity';
+import { Client } from '../../client/entity/Client.entity';
+import { Collaborator } from '../../collaborator/entity/Collaborator.entity';
 
 @Entity()
 export class medicalAppointment {

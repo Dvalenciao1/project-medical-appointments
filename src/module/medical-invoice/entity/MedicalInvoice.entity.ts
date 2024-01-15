@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { medicalAppointment } from './MedicalAppointment.entity';
+import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
 import { types } from 'src/common/enums/invoice.enums';
 
 @Entity()

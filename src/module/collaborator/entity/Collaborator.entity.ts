@@ -5,9 +5,9 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { collaboratorSchedule } from './CollaboratorSchedule.entity';
-import { medicalAppointment } from './MedicalAppointment.entity';
-import { roles } from '../enums/collaborator.enums';
+import { collaboratorSchedule } from '../../collaborator-schedule/entity/CollaboratorSchedule.entity';
+import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
+import { roles } from '../../../common/enums/collaborator.enums';
 
 @Entity()
 export class Collaborator {

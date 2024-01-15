@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { medicalSchedule } from './MedicalSchedule.entity';
+import { medicalSchedule } from '../../medical-schedule/entity/MedicalSchedule.entity';
 
 @Entity()
 export class Report {

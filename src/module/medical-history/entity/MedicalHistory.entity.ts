@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Client } from './Client.entity';
+import { Client } from '../../client/entity/Client.entity';
 
 @Entity()
 export class medicalHistory {
