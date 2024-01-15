@@ -1,36 +1,17 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
-import { collaboratorSchedule } from '../../collaborator-schedule/entity/CollaboratorSchedule.entity';
-import { medicalAppointment } from '../../medical-appointment/entity/MedicalAppointment.entity';
-import { roles } from '../../../common/enums/collaborator.enums';
-
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { collaboratorSchedule } from 'src/module/collaborator-schedule/entity/CollaboratorSchedule.entity';
+import { medicalAppointment } from 'src/module/medical-appointment/entity/MedicalAppointment.entity';
+import { roles } from 'src/common/enums/collaborator.enums';
 @Entity()
 export class Collaborator {
   @PrimaryGeneratedColumn()
   id?: number;
 
   @Column({ type: 'varchar', length: 50, nullable: false })
-  first_name!: string;
-
-  @Column({ type: 'varchar', length: 50, nullable: false })
-  surname!: string;
-
-  @Column({ type: 'enum', enum:roles, nullable: false })
-  rol!: roles;
-
-  @Column({ type: 'varchar', length: 50, nullable: false })
   department!: string;
 
-  @Column({ type: 'int', width: 10, nullable: false })
-  phone!: number;
-
-  @Column({ type: 'varchar', unique: true, nullable: false })
-  email!: string;
+  @Column({ type: 'enum', default: roles.DOCTOR, enum: roles, nullable: true })
+  role: string;
 
   @OneToMany(() => collaboratorSchedule, (schedule) => schedule.collaborator, {
     cascade: ['insert', 'update'],
@@ -47,6 +28,5 @@ export class Collaborator {
       onDelete: 'CASCADE',
     },
   )
-  @JoinColumn()
   appointments!: medicalAppointment[];
 }

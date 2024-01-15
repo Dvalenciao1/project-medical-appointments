@@ -16,13 +16,6 @@ export class CollaboratorService {
     return collaborators;
   }
 
-  async findOneByEmail(email: string): Promise<Collaborator> {
-    const collaborators = await this.collaboratorRepository.findOne({
-      where: [{ email }],
-    });
-    return collaborators;
-  }
-
   async create(collaborator: CollaboratorDto): Promise<Collaborator> {
     const collaborators = await this.collaboratorRepository.save(collaborator);
     return collaborators;

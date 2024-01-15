@@ -42,7 +42,7 @@ export class MedicalHistoryController {
   }
 
   @Delete('/:id')
-  deleteHistory(@Param('id') id: number): Promise<{}> {
+  deleteHistory(@Param('id') id: number) {
     const data = this.medicalHistoryServices.delete(id);
     return data;
   }

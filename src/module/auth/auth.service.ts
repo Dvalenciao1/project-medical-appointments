@@ -1,29 +1,64 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { RegisterAuthDto } from './dto/register-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.dto';
 import { ClientService } from '../client/client.service';
+import * as bcrypt from 'bcrypt';
+import { SerializedRegisterAuth } from './serializer/register-auth.serializer';
+import { plainToClass } from 'class-transformer';
+import { JwtService } from '@nestjs/jwt';
+import { SerializedLoginAuth } from './serializer/login-auth.serializer';
 
 @Injectable()
 export class AuthService {
-  constructor(private clientService: ClientService) {}
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  async register(
+    registerAuthDto: RegisterAuthDto,
+  ): Promise<SerializedRegisterAuth> {
+    const registerDto = plainToClass(RegisterAuthDto, registerAuthDto);
+    const client = await this.clientService.createClient({
+      ...registerDto,
+      password: await bcrypt.hash(registerAuthDto.password, 10),
+    });
+    return plainToClass(SerializedRegisterAuth, client, {
+      excludeExtraneousValues: true,
+    });
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async login(loginAuthDto: LoginAuthDto) {
+    const client = await this.clientService.findClientByEmail(
+      loginAuthDto.email,
+    );
+
+    if (!client) throw new UnauthorizedException('email is wrong');
+
+    const isPasswordValid = await bcrypt.compare(
+      loginAuthDto.password,
+      client.password,
+    );
+    if (!isPasswordValid) throw new UnauthorizedException('password is wrong');
+
+    const payload = {
+      email: client.email,
+      role: !client.collaborator ? 'client' : client.collaborator.role,
+    };
+
+    const token = await this.jwtService.signAsync(payload);
+    return plainToClass(
+      SerializedLoginAuth,
+      {
+        token: token,
+        ...client,
+        role: !client.collaborator ? 'client' : client.collaborator.role,
+      },
+      { excludeExtraneousValues: true, enableImplicitConversion: true },
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async profile({ email, rol }: { email: string; rol: string }) {
+    return await this.clientService.findClientByEmail(email);
   }
 }

@@ -25,11 +25,6 @@ export class CollaboratorController {
     return await this.collaboratorService.find();
   }
 
-  @Get('email')
-  async findCollaboratorByEmail(@Query('email') email: string) {
-    return await this.collaboratorService.findOneByEmail(email);
-  }
-
   @Post()
   async createCollaborator(@Body() collaborator: CollaboratorDto) {
     return await this.collaboratorService

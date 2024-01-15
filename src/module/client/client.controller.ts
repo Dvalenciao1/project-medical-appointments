@@ -7,22 +7,31 @@ import {
   Put,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
-import { ClientDto } from 'src/module/client/dto/Client.dto';
+
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/guard/auth.guard';
+import { RegisterAuthDto } from '../auth/dto/register-auth.dto';
 @ApiTags('Client')
 @Controller('client')
 export class ClientController {
   constructor(private clienteService: ClientService) {}
 
-  @Get()
-  async findClients() {
-    return await this.clienteService.findClients();
+  @Get('/doctor')
+  async findClientsDoctor() {
+    return await this.clienteService.findClientsDoctor();
   }
 
-  @Get('email')
-  async getClientByEmail(@Query('email') email: string) {
+  @Get('/')
+  async findAll() {
+    return await this.clienteService.findAll();
+  }
+
+  @Get('/:email')
+  @UseGuards(AuthGuard)
+  async getClientByEmail(@Param('email') email: string) {
     const client = await this.clienteService.findClientByEmail(email);
     return { data: client, message: 'Se ha encontrado una coincidencia' };
   }
@@ -34,13 +43,13 @@ export class ClientController {
   }
 
   @Post()
-  async createClient(@Body() client: ClientDto) {
+  async createClient(@Body() client: RegisterAuthDto) {
     const data = await this.clienteService.createClient(client);
     return { data, message: 'Se creo el nuevo cliente' };
   }
 
   @Put()
-  async updateClient(@Body() client: ClientDto) {
+  async updateClient(@Body() client: RegisterAuthDto) {
     const response = await this.clienteService.updateClient(client);
     return { response, message: 'El paciente fue actualizado' };
   }

@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Client } from '../../client/entity/Client.entity';
 import { Collaborator } from '../../collaborator/entity/Collaborator.entity';
+import { medicalInvoice } from '../../medical-invoice/entity/MedicalInvoice.entity';
 
 @Entity()
 export class medicalAppointment {
@@ -17,17 +18,18 @@ export class medicalAppointment {
   @Column({ type: 'datetime', nullable: false })
   appointment_date!: Date;
 
-  @Column({ type: 'varchar', length: 230, nullable: false })
-  appointment_location!: string;
-  
-  @Column()
+  @Column({ type: 'boolean', nullable: true })
   appointment_state!: boolean;
 
-  @ManyToOne(() => Collaborator, { cascade: true, eager: true })
-  @JoinColumn()
+  @ManyToOne(() => Collaborator, (collaborator) => collaborator.appointments, {
+    eager: true,
+  })
   collaborator!: Collaborator;
 
-  @ManyToOne(() => Client, { cascade: true, eager: true })
-  @JoinColumn()
+  @ManyToOne(() => Client, (client) => client.appointments)
   client!: Client;
+
+  @OneToOne(() => medicalInvoice, { cascade: true })
+  @JoinColumn()
+  invoice!: medicalInvoice;
 }

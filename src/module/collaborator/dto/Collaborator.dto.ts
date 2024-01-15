@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsArray,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -18,16 +17,6 @@ export class CollaboratorDto {
   @IsNumber()
   @IsPositive()
   id?: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  first_name!: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  surname!: string;
 
   @ApiProperty({ enum: [roles] })
   @IsNotEmpty()

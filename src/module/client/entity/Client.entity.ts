@@ -1,51 +1,40 @@
+import { Collaborator } from 'src/module/collaborator/entity/Collaborator.entity';
+import { medicalAppointment } from 'src/module/medical-appointment/entity/MedicalAppointment.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   Unique,
-  DeleteDateColumn,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
-import { genders } from '../../../common/enums/client.enums';
 
 @Entity()
 @Unique('Email', ['email'])
+@Unique('Dni', ['dni'])
 export class Client {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  first_name!: string;
+  @Column({ type: 'varchar', length: 60, nullable: false })
+  fullname!: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
-  second_name?: string;
-
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  surname!: string;
-
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  second_surname!: string;
-
-  @Column({ type: 'int', width: 10, nullable: false })
-  dni!: number;
-
-  @Column({ type: 'enum', enum: genders, nullable: false })
-  gender!: genders;
-
-  @Column({ type: 'date', nullable: false })
-  birth_date!: Date;
-
-  @Column({ type: 'int', width: 10, nullable: false })
-  phone!: number;
-
-  @Column({ type: 'varchar', length: 50, nullable: false })
-  address!: string;
+  @Column({ type: 'varchar', length: 10, nullable: true })
+  dni!: string;
 
   @Column({ type: 'varchar', nullable: false })
   email!: string;
 
-  @Column({ type: 'boolean', nullable: false })
-  health_insurance!: boolean;
+  @Column({ type: 'varchar', nullable: false })
+  password: string;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
+  @OneToMany(() => medicalAppointment, (appointment) => appointment.client, {
+    eager: true,
+  })
+  appointments: medicalAppointment[];
+
+  @OneToOne(() => Collaborator, { eager: true })
+  @JoinColumn()
+  collaborator: Collaborator;
 }

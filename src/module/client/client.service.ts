@@ -5,9 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClientDto } from 'src/module/client/dto/Client.dto';
-import { Client } from 'src/module/client/entity/Client.entity';
-import { Repository } from 'typeorm';
+
+import { Client } from './entity/Client.entity';
+import { Not, Repository } from 'typeorm';
+import { RegisterAuthDto } from '../auth/dto/register-auth.dto';
 
 @Injectable()
 export class ClientService {
@@ -15,25 +16,31 @@ export class ClientService {
     @InjectRepository(Client)
     private readonly clientRepository: Repository<Client>,
   ) {}
+  
+  async findAll(): Promise<Client[]> {
+    const client = await this.clientRepository.find();
+    return client;
+  }
 
   async findClientByEmail(email: string): Promise<Client> {
     const client = await this.clientRepository.findOne({
       where: [{ email }],
     });
-    if (!client) throw new NotFoundException('El usuario no existe');
     return client;
   }
 
-  async findClients(): Promise<Array<Client>> {
-    const clients = await this.clientRepository.find();
+  async findClientsDoctor() {
+    const clients = await this.clientRepository.find({
+      where: { collaborator: Not('Null') },
+    });
     return clients;
   }
 
-  async createClient(client: ClientDto) {
+  async createClient(client: RegisterAuthDto) {
     try {
       return await this.clientRepository.save(client);
     } catch (error) {
-      throw new BadRequestException('Algo salio mal', {
+      throw new BadRequestException('Error Server', {
         description: error.message,
       });
     }
@@ -47,11 +54,7 @@ export class ClientService {
     return client;
   }
 
-  async updateClient(client: ClientDto) {
-    if (!client.id) {
-      return this.createClient(client);
-    }
-
+  async updateClient(client: RegisterAuthDto) {
     const data = await this.clientRepository.save(client);
     if (!data) throw new BadRequestException('Error Server');
     return data;
